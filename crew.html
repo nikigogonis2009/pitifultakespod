@@ -22,6 +22,15 @@ permalink: /crew/
         {% assign total = 0 %}{% for p in posts %}{% assign total = total | plus: p.pitiful %}{% endfor %}
         <div><dt>Avg Pitiful</dt><dd>{% if posts.size > 0 %}{{ total | times: 1.0 | divided_by: posts.size | round: 1 }}{% else %}–{% endif %}</dd></div>
       </dl>
+      <div class="player-favs">
+        <p class="player-favs-title">Favorite teams</p>
+        <ul>
+          {% for s in site.data.sports %}{% if s[0] != "other" %}
+          {% assign team = c.favorites[s[0]] %}
+          <li style="--chip: {{ s[1].color }}"><span class="fav-sport">{{ s[1].label }}</span><span class="fav-team{% if team == nil or team == "" %} is-tbd{% endif %}">{% if team and team != "" %}{{ team }}{% else %}TBD{% endif %}</span></li>
+          {% endif %}{% endfor %}
+        </ul>
+      </div>
     </div>
   </article>
   {% endfor %}

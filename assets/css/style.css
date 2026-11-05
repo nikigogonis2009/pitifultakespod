@@ -342,6 +342,13 @@ button { font: inherit; cursor: pointer; }
 .player-stats div:last-child { border-right: 0; }
 .player-stats dt { font: 700 12px/1 var(--cond); letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
 .player-stats dd { margin: 4px 0 0; font: 400 28px/1 var(--display); color: var(--navy); }
+.player-favs { margin-top: 22px; }
+.player-favs-title { font: 700 13px/1 var(--cond); letter-spacing: .2em; text-transform: uppercase; color: var(--muted); margin: 0 0 10px; }
+.player-favs ul { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 8px; }
+.player-favs li { display: flex; align-items: stretch; border-radius: 6px; overflow: hidden; border: 1px solid var(--line); background: #fbf9f5; min-width: 0; }
+.fav-sport { flex: none; width: 66px; background: var(--chip); color: #fff; font: 700 13px/1 var(--cond); letter-spacing: .1em; text-transform: uppercase; display: grid; place-items: center; padding: 8px 4px; }
+.fav-team { padding: 8px 10px; font: 700 16px/1.15 var(--cond); text-transform: uppercase; letter-spacing: .03em; color: var(--navy); min-width: 0; overflow-wrap: anywhere; }
+.fav-team.is-tbd { color: #a8a294; font-weight: 600; }
 @media (max-width: 640px) {
   .player { grid-template-columns: 1fr; }
   .player-photo { min-height: 150px; }
