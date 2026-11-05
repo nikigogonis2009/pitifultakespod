@@ -72,3 +72,17 @@
     soccer: ""
     golf: ""
     college: ""
+- id: host6
+  name: Host Six
+  role: The Rookie
+  number: 33
+  bio: Newest member of the crew. Already has the worst take in the group chat.
+  photo: ""
+  favorites:          # favorite team (or fighter, for UFC) per sport; leave "" to show TBD
+    nfl: ""
+    nba: ""
+    ufc: ""
+    nhl: ""
+    soccer: ""
+    golf: ""
+    college: ""

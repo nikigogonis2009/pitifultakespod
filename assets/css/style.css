@@ -280,7 +280,7 @@ button { font: inherit; cursor: pointer; }
 .sport-tile:hover .sport-count { color: #fff; }
 
 /* ---------- Crew strip (jerseys) ---------- */
-.crew-strip { display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; }
+.crew-strip { display: grid; grid-template-columns: repeat(6, 1fr); gap: 16px; }
 @media (max-width: 960px) { .crew-strip { grid-template-columns: repeat(3, 1fr); } }
 @media (max-width: 560px) { .crew-strip { grid-template-columns: repeat(2, 1fr); } }
 .jersey {
