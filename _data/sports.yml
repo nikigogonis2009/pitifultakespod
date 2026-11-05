@@ -1,7 +1,7 @@
 # Each post's `sport:` should match one of these keys.
 nfl: { label: NFL, color: "#E3343A" }
 nba: { label: NBA, color: "#F07A1A" }
-mlb: { label: MLB, color: "#2A4BA0" }
+ufc: { label: UFC, color: "#2A4BA0" }
 nhl: { label: NHL, color: "#5B7A99" }
 soccer: { label: Soccer, color: "#1F9D55" }
 college: { label: College, color: "#8B3FC9" }

@@ -23,7 +23,7 @@ permalink: /crew/
         <div><dt>Avg Pitiful</dt><dd>{% if posts.size > 0 %}{{ total | times: 1.0 | divided_by: posts.size | round: 1 }}{% else %}–{% endif %}</dd></div>
       </dl>
       <div class="player-favs">
-        <p class="player-favs-title">Favorite teams</p>
+        <p class="player-favs-title">Favorites</p>
         <ul>
           {% for s in site.data.sports %}{% if s[0] != "other" %}
           {% assign team = c.favorites[s[0]] %}

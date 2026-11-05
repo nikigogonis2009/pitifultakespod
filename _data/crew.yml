@@ -8,10 +8,10 @@
   number: 1
   bio: Has never agreed with a consensus pick. Will defend a 4-13 team to the grave.
   photo: ""
-  favorites:          # favorite team per sport; leave "" to show TBD
+  favorites:          # favorite team (or fighter, for UFC) per sport; leave "" to show TBD
     nfl: ""
     nba: ""
-    mlb: ""
+    ufc: ""
     nhl: ""
     soccer: ""
     college: ""
@@ -21,10 +21,10 @@
   number: 12
   bio: Brings a spreadsheet to every argument. Still loses most of them.
   photo: ""
-  favorites:          # favorite team per sport; leave "" to show TBD
+  favorites:          # favorite team (or fighter, for UFC) per sport; leave "" to show TBD
     nfl: ""
     nba: ""
-    mlb: ""
+    ufc: ""
     nhl: ""
     soccer: ""
     college: ""
@@ -34,10 +34,10 @@
   number: 23
   bio: Thinks his team wins it all every year. Every year.
   photo: ""
-  favorites:          # favorite team per sport; leave "" to show TBD
+  favorites:          # favorite team (or fighter, for UFC) per sport; leave "" to show TBD
     nfl: ""
     nba: ""
-    mlb: ""
+    ufc: ""
     nhl: ""
     soccer: ""
     college: ""
@@ -47,10 +47,10 @@
   number: 7
   bio: Every rookie is a future Hall of Famer. Every trade is a heist.
   photo: ""
-  favorites:          # favorite team per sport; leave "" to show TBD
+  favorites:          # favorite team (or fighter, for UFC) per sport; leave "" to show TBD
     nfl: ""
     nba: ""
-    mlb: ""
+    ufc: ""
     nhl: ""
     soccer: ""
     college: ""
@@ -60,10 +60,10 @@
   number: 99
   bio: Says nothing for forty minutes, then drops the worst take of the episode.
   photo: ""
-  favorites:          # favorite team per sport; leave "" to show TBD
+  favorites:          # favorite team (or fighter, for UFC) per sport; leave "" to show TBD
     nfl: ""
     nba: ""
-    mlb: ""
+    ufc: ""
     nhl: ""
     soccer: ""
     college: ""
