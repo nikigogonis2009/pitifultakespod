@@ -1,0 +1,89 @@
+---
+layout: default
+body_class: home
+---
+<section class="hero">
+  <div class="hero-field" aria-hidden="true"></div>
+  <div class="wrap hero-inner">
+    <div class="hero-copy">
+      <p class="kicker kicker-light">The official blog</p>
+      <h1 class="hero-title">Bad opinions.<br><span>Full confidence.</span></h1>
+      <p class="hero-lede">Hot takes, cold takes and a few genuinely pitiful ones from the Pitiful Takes Sports Podcast. Read them now and hold them against us later.</p>
+      <div class="hero-ctas">
+        {% if site.posts.size > 0 %}<a class="btn btn-red" href="{{ site.posts.first.url | relative_url }}">Read the latest take</a>{% endif %}
+        <a class="btn btn-outline" href="{{ '/crew/' | relative_url }}">Meet the crew</a>
+      </div>
+    </div>
+    <div class="hero-logo">
+      <img src="{{ '/assets/img/logo.png' | relative_url }}" alt="Pitiful Takes Sports Podcast logo" width="600" height="600">
+    </div>
+  </div>
+</section>
+
+{% if site.posts.size > 0 %}
+<div class="ticker" aria-label="Latest takes">
+  <div class="ticker-label">Hot Takes</div>
+  <div class="ticker-track">
+    <div class="ticker-move">
+      {% for rep in (1..2) %}
+      {% for post in site.posts limit:8 %}
+      <a href="{{ post.url | relative_url }}" {% if rep == 2 %}aria-hidden="true" tabindex="-1"{% endif %}><b>{{ site.data.sports[post.sport].label | default: "Take" }}</b> {{ post.take | default: post.title }}</a>
+      {% endfor %}
+      {% endfor %}
+    </div>
+  </div>
+</div>
+{% endif %}
+
+<section class="section">
+  <div class="wrap">
+    <div class="section-head">
+      <h2 class="section-title">Fresh Takes</h2>
+      <a class="section-more" href="{{ '/takes/' | relative_url }}">All takes →</a>
+    </div>
+    {% if site.posts.size > 0 %}
+    <div class="grid">
+      {% for post in site.posts limit:7 %}
+        {% if forloop.first %}{% include post-card.html post=post featured=true %}{% else %}{% include post-card.html post=post %}{% endif %}
+      {% endfor %}
+    </div>
+    {% else %}
+    <p class="empty">No takes yet. Give it a week.</p>
+    {% endif %}
+  </div>
+</section>
+
+<section class="section section-dark">
+  <div class="wrap">
+    <div class="section-head">
+      <h2 class="section-title">Pick Your Sport</h2>
+    </div>
+    <div class="sport-grid">
+      {% for s in site.data.sports %}
+      {% assign count = site.posts | where: "sport", s[0] | size %}
+      <a class="sport-tile" style="--chip: {{ s[1].color }}" href="{{ '/takes/' | relative_url }}#{{ s[0] }}">
+        <span class="sport-name">{{ s[1].label }}</span>
+        <span class="sport-count">{{ count }} take{% if count != 1 %}s{% endif %}</span>
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="section-head">
+      <h2 class="section-title">The Starting Five</h2>
+      <a class="section-more" href="{{ '/crew/' | relative_url }}">Full roster →</a>
+    </div>
+    <div class="crew-strip">
+      {% for c in site.data.crew %}
+      <a class="jersey" href="{{ '/crew/' | relative_url }}#{{ c.id }}">
+        <span class="jersey-num">{{ c.number }}</span>
+        <span class="jersey-name">{{ c.name }}</span>
+        <span class="jersey-role">{{ c.role }}</span>
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>

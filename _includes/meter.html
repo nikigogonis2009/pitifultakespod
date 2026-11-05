@@ -1,0 +1,8 @@
+{% comment %}How pitiful is this take? 1–5. Pass `rating`.{% endcomment %}
+{% assign r = include.rating | default: 3 | plus: 0 %}
+{% assign labels = "Actually Reasonable,Mildly Questionable,Pretty Pitiful,Deeply Pitiful,Career-Ending" | split: "," %}
+{% assign idx = r | minus: 1 %}
+<span class="meter{% if include.big %} meter-big{% endif %}" title="Pitiful-meter: {{ r }}/5 · {{ labels[idx] }}" aria-label="Pitiful-meter {{ r }} out of 5: {{ labels[idx] }}">
+  <span class="meter-bars" aria-hidden="true">{% for i in (1..5) %}<i{% if i <= r %} class="on"{% endif %}></i>{% endfor %}</span>
+  {% if include.big %}<span class="meter-label">{{ labels[idx] }}</span>{% endif %}
+</span>

@@ -1,0 +1,28 @@
+---
+layout: page
+title: The Crew
+kicker: Roster
+lede: The people responsible. Direct all complaints here.
+permalink: /crew/
+---
+<div class="roster">
+  {% for c in site.data.crew %}
+  {% assign posts = site.posts | where: "author", c.id %}
+  <article class="player" id="{{ c.id }}">
+    <div class="player-photo">
+      {% if c.photo and c.photo != "" %}<img src="{{ '/assets/img/' | append: c.photo | relative_url }}" alt="{{ c.name }}" loading="lazy">{% else %}<span class="player-num">{{ c.number }}</span>{% endif %}
+    </div>
+    <div class="player-body">
+      <p class="player-role">{{ c.role }}</p>
+      <h2 class="player-name">{{ c.name }}</h2>
+      <p class="player-bio">{{ c.bio }}</p>
+      <dl class="player-stats">
+        <div><dt>Takes</dt><dd>{{ posts.size }}</dd></div>
+        <div><dt>No.</dt><dd>{{ c.number }}</dd></div>
+        {% assign total = 0 %}{% for p in posts %}{% assign total = total | plus: p.pitiful %}{% endfor %}
+        <div><dt>Avg Pitiful</dt><dd>{% if posts.size > 0 %}{{ total | times: 1.0 | divided_by: posts.size | round: 1 }}{% else %}–{% endif %}</dd></div>
+      </dl>
+    </div>
+  </article>
+  {% endfor %}
+</div>

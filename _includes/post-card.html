@@ -1,0 +1,20 @@
+{% assign post = include.post %}
+{% assign author = site.data.crew | where: "id", post.author | first %}
+{% assign sp = site.data.sports[post.sport] | default: site.data.sports.other %}
+<article class="card{% if include.featured %} card-featured{% endif %}" data-sport="{{ post.sport | default: 'other' }}" style="--chip: {{ sp.color }}">
+  <a class="card-link" href="{{ post.url | relative_url }}">
+    <div class="card-top">
+      {% include sport-chip.html sport=post.sport %}
+      {% include meter.html rating=post.pitiful %}
+    </div>
+    <h3 class="card-title">{{ post.title }}</h3>
+    {% if post.take %}<p class="card-take">“{{ post.take }}”</p>{% endif %}
+    <p class="card-excerpt">{{ post.excerpt | strip_html | normalize_whitespace | truncate: 150 }}</p>
+    <div class="card-meta">
+      <span>{% if author %}{{ author.name }}{% else %}The Crew{% endif %}</span>
+      <span aria-hidden="true">•</span>
+      <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%b %-d, %Y" }}</time>
+      <span class="card-arrow" aria-hidden="true">→</span>
+    </div>
+  </a>
+</article>

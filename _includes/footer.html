@@ -1,0 +1,17 @@
+<footer class="site-footer">
+  <div class="footer-stripe" aria-hidden="true"></div>
+  <div class="wrap footer-inner">
+    <div class="footer-brand">
+      <img src="{{ '/assets/img/logo.png' | relative_url }}" alt="" width="72" height="72" loading="lazy">
+      <div>
+        <p class="footer-name">Pitiful Takes</p>
+        <p class="footer-tag">Bad opinions. Full confidence. Zero accountability.</p>
+      </div>
+    </div>
+    <div class="footer-links">
+      {% for l in site.links %}{% if l[1] != "" %}<a href="{{ l[1] }}" target="_blank" rel="noopener">{{ l[0] | capitalize }}</a>{% endif %}{% endfor %}
+      <a href="{{ '/feed.xml' | relative_url }}">RSS</a>
+    </div>
+    <p class="footer-legal">© {{ site.time | date: "%Y" }} Pitiful Takes Sports Podcast. No takes were fact-checked in the making of this site.</p>
+  </div>
+</footer>

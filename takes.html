@@ -1,0 +1,21 @@
+---
+layout: page
+title: All Takes
+kicker: The archive
+lede: Every take we've ever published. Filter by sport, then judge us.
+permalink: /takes/
+---
+<div class="filters" role="group" aria-label="Filter by sport">
+  <button class="filter is-active" data-filter="all" aria-pressed="true">All</button>
+  {% for s in site.data.sports %}
+  {% assign count = site.posts | where: "sport", s[0] | size %}
+  {% if count > 0 %}<button class="filter" data-filter="{{ s[0] }}" style="--chip: {{ s[1].color }}" aria-pressed="false">{{ s[1].label }} <small>{{ count }}</small></button>{% endif %}
+  {% endfor %}
+</div>
+
+<div class="grid grid-archive" data-filter-target>
+  {% for post in site.posts %}
+    {% include post-card.html post=post %}
+  {% endfor %}
+</div>
+<p class="empty" data-empty hidden>Nothing here yet. That might be the least pitiful take on the site.</p>

@@ -1,0 +1,54 @@
+---
+layout: default
+---
+{% assign author = site.data.crew | where: "id", page.author | first %}
+{% assign words = content | strip_html | number_of_words %}
+{% assign mins = words | divided_by: 200 | at_least: 1 %}
+<article class="post">
+  <header class="post-hero">
+    <div class="wrap wrap-narrow">
+      <div class="post-tags">
+        {% include sport-chip.html sport=page.sport %}
+        <span class="post-read">{{ mins }} min read</span>
+      </div>
+      <h1 class="post-title">{{ page.title }}</h1>
+      {% if page.take %}
+      <div class="the-take">
+        <span class="the-take-label">The Take</span>
+        <p>{{ page.take }}</p>
+      </div>
+      {% endif %}
+      <div class="post-byline">
+        <span class="avatar" aria-hidden="true">{% if author.photo != "" and author.photo %}<img src="{{ '/assets/img/' | append: author.photo | relative_url }}" alt="">{% else %}{{ author.number | default: "PT" }}{% endif %}</span>
+        <div>
+          <p class="byline-name">{% if author %}{{ author.name }}{% else %}The Crew{% endif %}</p>
+          <p class="byline-date"><time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%B %-d, %Y" }}</time></p>
+        </div>
+        <div class="byline-meter">
+          <span class="meter-caption">Pitiful-meter</span>
+          {% include meter.html rating=page.pitiful big=true %}
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="wrap wrap-narrow">
+    <div class="prose">
+      {{ content }}
+    </div>
+
+    <div class="post-actions">
+      <button class="btn btn-ghost" data-share data-title="{{ page.title | escape }}">Share this take</button>
+      <a class="btn btn-ghost" href="{{ '/takes/' | relative_url }}">All takes</a>
+    </div>
+
+    <nav class="post-nav" aria-label="More takes">
+      {% if page.previous %}
+      <a class="post-nav-link" href="{{ page.previous.url | relative_url }}"><span>← Older take</span><strong>{{ page.previous.title }}</strong></a>
+      {% else %}<span></span>{% endif %}
+      {% if page.next %}
+      <a class="post-nav-link next" href="{{ page.next.url | relative_url }}"><span>Newer take →</span><strong>{{ page.next.title }}</strong></a>
+      {% endif %}
+    </nav>
+  </div>
+</article>

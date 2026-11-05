@@ -1,0 +1,31 @@
+title: Pitiful Takes
+tagline: Sports Podcast
+description: >-
+  The official blog of the Pitiful Takes Sports Podcast. Bad opinions,
+  delivered with full confidence.
+# If your site lives at https://USERNAME.github.io/pitifultakespod, keep this.
+# If you use a custom domain or a USERNAME.github.io repo, set baseurl to "".
+url: "https://nikigogonis2009.github.io"
+baseurl: "/pitifultakespod"
+
+# Where people can find the show. Leave blank ("") to hide a link.
+links:
+  spotify: ""
+  apple: ""
+  youtube: ""
+  instagram: ""
+  tiktok: ""
+
+permalink: /takes/:year/:month/:title/
+timezone: America/New_York
+markdown: kramdown
+highlighter: rouge
+exclude:
+  - README.md
+  - Gemfile
+  - Gemfile.lock
+  - vendor
+
+defaults:
+  - scope: { path: "", type: posts }
+    values: { layout: post, pitiful: 3, sport: other }

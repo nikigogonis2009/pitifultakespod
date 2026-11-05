@@ -1,0 +1,16 @@
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="{{ '/' | relative_url }}" aria-label="{{ site.title }} home">
+      <img src="{{ '/assets/img/logo.png' | relative_url }}" alt="" width="44" height="44">
+      <span class="brand-text"><span class="brand-name">Pitiful Takes</span><span class="brand-sub">Sports Podcast</span></span>
+    </a>
+    <button class="nav-toggle" aria-expanded="false" aria-controls="site-nav" aria-label="Menu"><span></span><span></span><span></span></button>
+    <nav id="site-nav" class="site-nav">
+      {% assign p = page.url %}
+      <a href="{{ '/' | relative_url }}" {% if p == '/' %}aria-current="page"{% endif %}>Home</a>
+      <a href="{{ '/takes/' | relative_url }}" {% if p == '/takes/' or page.layout == 'post' %}aria-current="page"{% endif %}>All Takes</a>
+      <a href="{{ '/crew/' | relative_url }}" {% if p == '/crew/' %}aria-current="page"{% endif %}>The Crew</a>
+      <a class="nav-cta" href="{{ '/feed.xml' | relative_url }}">RSS</a>
+    </nav>
+  </div>
+</header>

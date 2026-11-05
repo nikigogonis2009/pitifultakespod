@@ -1,0 +1,2 @@
+{% assign s = site.data.sports[include.sport] | default: site.data.sports.other %}
+<span class="chip" style="--chip: {{ s.color }}">{{ s.label }}</span>
