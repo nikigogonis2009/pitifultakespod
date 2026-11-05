@@ -14,6 +14,7 @@
     ufc: ""
     nhl: ""
     soccer: ""
+    golf: ""
     college: ""
 - id: host2
   name: Host Two
@@ -27,6 +28,7 @@
     ufc: ""
     nhl: ""
     soccer: ""
+    golf: ""
     college: ""
 - id: host3
   name: Host Three
@@ -40,6 +42,7 @@
     ufc: ""
     nhl: ""
     soccer: ""
+    golf: ""
     college: ""
 - id: host4
   name: Host Four
@@ -53,6 +56,7 @@
     ufc: ""
     nhl: ""
     soccer: ""
+    golf: ""
     college: ""
 - id: host5
   name: Host Five
@@ -66,4 +70,5 @@
     ufc: ""
     nhl: ""
     soccer: ""
+    golf: ""
     college: ""

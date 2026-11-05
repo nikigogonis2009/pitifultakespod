@@ -18,7 +18,7 @@ Add a file to `_posts/` named `YEAR-MONTH-DAY-short-title.md`, for example `_pos
 ---
 title: "The Jets Are Winning the Super Bowl"
 author: host1        # an id from _data/crew.yml
-sport: nfl           # nfl, nba, ufc, nhl, soccer, college, other
+sport: nfl           # nfl, nba, ufc, nhl, soccer, golf, college, other
 pitiful: 5           # Pitiful-meter, 1 (reasonable) to 5 (career-ending)
 take: "The Jets win it all. Book it."   # the one-line take shown in the red box
 ---
