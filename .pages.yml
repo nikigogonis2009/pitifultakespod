@@ -36,7 +36,7 @@ content:
             - { value: host2, label: Niko Gogonis }
             - { value: host3, label: Sebastian Blasdel }
             - { value: host1, label: Oliver Clayman }
-            - { value: host5, label: Host Five }
+            - { value: host5, label: Derya Hagnesten }
             - { value: host6, label: David Mathes }
             - { value: host4, label: Riley Bidner }
       - name: sport

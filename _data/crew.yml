@@ -10,13 +10,13 @@
   bio: He does all our social media. His takes suck though.
   photo: ""
   favorites:
-    nfl: ""
-    nba: ""
-    ufc: ""
-    nhl: ""
-    soccer: ""
-    golf: ""
-    college: ""
+    nfl: Buffalo Bills
+    nba: Miami Heat
+    ufc: Carlos Prates
+    nhl: Florida Panthers
+    soccer: Brighton & Hove Albion
+    golf: Rory McIlroy
+    college: Miami (FL)
 - id: host2
   name: Niko Gogonis
   role: The Statistician
@@ -60,7 +60,7 @@
     golf: Bryson DeChambeau
     college: Miami (FL)
 - id: host5
-  name: Host Five
+  name: Derya Hagnesten
   role: The Village Idiot
   number: 24
   bio: Whenever he speaks, it's something diabolical. His clips carry our TikTok.

@@ -20,8 +20,8 @@ permalink: /crew/
       <dl class="player-stats">
         <div><dt>Takes</dt><dd>{{ posts.size }}</dd></div>
         <div><dt>No.</dt><dd>{{ c.number }}</dd></div>
-        {% if posts.size > 0 %}{% assign total = 0 %}{% for p in posts %}{% assign total = total | plus: p.pitiful %}{% endfor %}
-        <div><dt>Avg Pitiful</dt><dd>{{ total | times: 1.0 | divided_by: posts.size | round: 1 }}</dd></div>{% endif %}
+        {% assign total = 0 %}{% for p in posts %}{% assign total = total | plus: p.pitiful %}{% endfor %}
+        <div><dt>Avg Pitiful</dt><dd>{% if posts.size > 0 %}{{ total | times: 1.0 | divided_by: posts.size | round: 1 }}{% else %}<span class="stat-empty" title="No takes yet">–</span>{% endif %}</dd></div>
       </dl>
       <div class="player-favs">
         <p class="player-favs-title">Favorites</p>
