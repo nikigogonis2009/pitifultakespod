@@ -7,7 +7,7 @@
   name: Oliver Clayman
   role: The Influencer
   number: 18
-  bio: He does all our social media. His takes suck though.
+  bio: He does all our social media. His takes are pretty bad though.
   photo: ""
   favorites:
     nfl: Buffalo Bills
@@ -35,7 +35,7 @@
   name: Sebastian Blasdel
   role: The Homer
   number: 9
-  bio: Thinks his team wins it all every year. He's always let down though.
+  bio: Thinks his team wins it all every year until he gets let down.
   photo: ""
   favorites:
     nfl: Miami Dolphins
@@ -43,7 +43,7 @@
     ufc: Jose Ochoa
     nhl: Florida Panthers
     soccer: Arsenal
-    golf: ""
+    golf: Jordan Spieth
     college: Miami (FL)
 - id: host4
   name: Riley Bidner
