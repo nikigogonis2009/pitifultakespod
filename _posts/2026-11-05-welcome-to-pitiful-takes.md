@@ -1,6 +1,6 @@
 ---
 title: "Welcome to Pitiful Takes: The Blog"
-date: 2026-11-05
+date: 2026-11-05 12:00:00 -0500
 author: host2
 sport: other
 take: We have a blog now.

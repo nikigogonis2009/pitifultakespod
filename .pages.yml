@@ -24,9 +24,11 @@ content:
         type: string
         required: true
       - name: date
-        label: Date
+        label: Date and time (the newest post shows first)
         type: date
         required: true
+        options:
+          time: true
       - name: author
         label: Author
         type: select
