@@ -6,7 +6,7 @@ sport: other
 take: We have a blog now. That's the take.
 pitiful: 1
 ---
-The podcast was not enough. Forty-five minutes of yelling about sports apparently doesn't cover it, so now we're writing things down too, which means there's a permanent record of every bad call we make.
+The podcast was not enough. Forty-five minutes of yelling about sports apparently doesn't do this podcast justice, so now all the horrible takes are in writing.
 
 ## What goes here
 
