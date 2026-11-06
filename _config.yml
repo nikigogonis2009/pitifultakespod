@@ -3,10 +3,9 @@ tagline: Sports Podcast
 description: >-
   The official blog of the Pitiful Takes Sports Podcast. Bad opinions,
   delivered with full confidence.
-# If your site lives at https://USERNAME.github.io/pitifultakespod, keep this.
-# If you use a custom domain or a USERNAME.github.io repo, set baseurl to "".
-url: "https://nikigogonis2009.github.io"
-baseurl: "/pitifultakespod"
+# The site's address. The CNAME file in this repo must match the domain.
+url: "https://pitifultakes.com"
+baseurl: ""
 
 # Where people can find the show. Leave blank ("") to hide a link.
 links:

@@ -4,11 +4,24 @@ The website for the Pitiful Takes Sports Podcast. It's a [Jekyll](https://jekyll
 
 ## Put it online (one time)
 
-1. On GitHub, open **Settings → Pages**.
-2. Under **Build and deployment**, pick **Deploy from a branch**, branch `main`, folder `/ (root)`, and save.
-3. After a minute or two the site is live at `https://nikigogonis2009.github.io/pitifultakespod/`.
+The site lives at **https://pitifultakes.com**, hosted free on GitHub Pages. The domain is registered at Namecheap. (Preview at http://localhost:4000/ when running locally.)
 
-If you later buy a custom domain, set `baseurl: ""` and `url:` in `_config.yml`.
+**1. Namecheap** (Domain List → Manage next to pitifultakes.com → Advanced DNS). Delete the default parking records, then add:
+
+| Type | Host | Value |
+|---|---|---|
+| A Record | `@` | `185.199.108.153` |
+| A Record | `@` | `185.199.109.153` |
+| A Record | `@` | `185.199.110.153` |
+| A Record | `@` | `185.199.111.153` |
+| CNAME Record | `www` | `nikigogonis2009.github.io.` |
+
+**2. GitHub** (this repo → Settings → Pages):
+- Build and deployment: **Deploy from a branch**, branch `main`, folder `/ (root)`.
+- Custom domain: `pitifultakes.com`, then Save.
+- Once the DNS check passes (minutes to a few hours), tick **Enforce HTTPS**.
+
+The `CNAME` file in this repo holds the domain. Don't delete it.
 
 ## Write a new take
 
@@ -48,4 +61,4 @@ bundle install
 bundle exec jekyll serve
 ```
 
-Then open http://localhost:4000/pitifultakespod/.
+Then open http://localhost:4000/.
