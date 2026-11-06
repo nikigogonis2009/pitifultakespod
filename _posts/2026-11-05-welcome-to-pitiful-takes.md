@@ -1,12 +1,11 @@
 ---
 title: "Welcome to Pitiful Takes: The Blog"
 date: 2026-11-05
-author: host1
+author: host2
 sport: other
+take: We have a blog now. That's the take.
 pitiful: 1
-take: "We have a blog now. That's the take."
 ---
-
 The podcast was not enough. Forty-five minutes of yelling about sports apparently doesn't cover it, so now we're writing things down too, which means there's a permanent record of every bad call we make.
 
 ## What goes here
