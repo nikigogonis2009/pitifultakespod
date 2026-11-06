@@ -19,7 +19,7 @@ layout: default
       </div>
       {% endif %}
       <div class="post-byline">
-        <span class="avatar" aria-hidden="true">{% if author.photo != "" and author.photo %}<img src="{{ '/assets/img/' | append: author.photo | relative_url }}" alt="">{% else %}{{ author.number | default: "PT" }}{% endif %}</span>
+        <span class="avatar" aria-hidden="true">{% if author.photo != "" and author.photo %}{% assign src = author.photo %}{% unless src contains "assets/" %}{% assign src = '/assets/img/' | append: src %}{% endunless %}<img src="{{ src | relative_url }}" alt="">{% else %}{{ author.number | default: "PT" }}{% endif %}</span>
         <div>
           <p class="byline-name">{% if author %}{{ author.name }}{% else %}The Crew{% endif %}</p>
           <p class="byline-date"><time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%B %-d, %Y" }}</time></p>

@@ -1,5 +1,6 @@
 ---
 title: "Running Backs Matter Again and Everyone Needs to Apologize"
+date: 2026-11-03
 author: host3
 sport: nfl
 pitiful: 3

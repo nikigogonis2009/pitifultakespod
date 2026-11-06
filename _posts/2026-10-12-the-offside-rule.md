@@ -1,5 +1,6 @@
 ---
 title: "Get Rid of Offside. Let Chaos Reign."
+date: 2026-10-12
 author: host5
 sport: soccer
 pitiful: 4

@@ -400,7 +400,7 @@ button { font: inherit; cursor: pointer; }
 /* Article typography */
 .prose { padding: 48px 0 16px; font-size: 19px; line-height: 1.7; }
 .prose > *:first-child { margin-top: 0; }
-.prose > p:first-of-type::first-letter {
+.post .prose > p:first-of-type::first-letter {
   float: left; font: 400 76px/.8 var(--display); color: var(--red); padding: 8px 10px 0 0;
 }
 .prose h2, .prose h3 {
@@ -488,3 +488,7 @@ button { font: inherit; cursor: pointer; }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
 }
+
+/* Buttons inside article text */
+.prose a.btn { color: #fff; text-decoration: none; }
+.page-body.prose { padding-top: 40px; }

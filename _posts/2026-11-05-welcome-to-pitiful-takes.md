@@ -1,5 +1,6 @@
 ---
 title: "Welcome to Pitiful Takes: The Blog"
+date: 2026-11-05
 author: host1
 sport: other
 pitiful: 1

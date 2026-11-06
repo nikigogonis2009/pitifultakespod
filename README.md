@@ -12,6 +12,9 @@ If you later buy a custom domain, set `baseurl: ""` and `url:` in `_config.yml`.
 
 ## Write a new take
 
+**Easiest:** use the editor at [app.pagescms.org](https://app.pagescms.org). Sign in with GitHub, install the Pages CMS app on this repo, and you get a normal writing screen for posts and the crew list. Step-by-step instructions are on the site's `/write/` page (linked as "Write a take" in the footer). The editor is set up by `.pages.yml`.
+
+**By hand:** 
 Add a file to `_posts/` named `YEAR-MONTH-DAY-short-title.md`, for example `_posts/2026-11-10-jets-win-it-all.md`:
 
 ```markdown

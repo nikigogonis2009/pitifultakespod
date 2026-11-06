@@ -11,7 +11,7 @@ permalink: /crew/
   {% assign posts = site.posts | where: "author", c.id %}
   <article class="player" id="{{ c.id }}">
     <div class="player-photo">
-      {% if c.photo and c.photo != "" %}<img src="{{ '/assets/img/' | append: c.photo | relative_url }}" alt="{{ c.name }}" loading="lazy">{% else %}{% assign parts = c.name | split: " " %}<span class="player-initials" aria-hidden="true">{{ parts.first | slice: 0 }}{% if parts.size > 1 %}{{ parts.last | slice: 0 }}{% endif %}</span><span class="player-photo-hint">Photo coming soon</span>{% endif %}
+      {% if c.photo and c.photo != "" %}{% assign src = c.photo %}{% unless src contains "assets/" %}{% assign src = '/assets/img/' | append: src %}{% endunless %}<img src="{{ src | relative_url }}" alt="{{ c.name }}" loading="lazy">{% else %}{% assign parts = c.name | split: " " %}<span class="player-initials" aria-hidden="true">{{ parts.first | slice: 0 }}{% if parts.size > 1 %}{{ parts.last | slice: 0 }}{% endif %}</span><span class="player-photo-hint">Photo coming soon</span>{% endif %}
     </div>
     <div class="player-body">
       <p class="player-role">{{ c.role }}</p>

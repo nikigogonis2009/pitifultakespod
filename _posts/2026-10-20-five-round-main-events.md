@@ -1,5 +1,6 @@
 ---
 title: "Every UFC Fight Should Be Five Rounds and Nobody Can Change My Mind"
+date: 2026-10-20
 author: host4
 sport: ufc
 pitiful: 5

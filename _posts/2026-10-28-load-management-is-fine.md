@@ -1,5 +1,6 @@
 ---
 title: "Load Management Is Fine, Actually"
+date: 2026-10-28
 author: host2
 sport: nba
 pitiful: 4

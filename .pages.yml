@@ -1,0 +1,93 @@
+# Pages CMS setup: lets you write and edit posts at https://app.pagescms.org
+# Docs: https://pagescms.org/docs/
+
+media:
+  input: assets/img/posts
+  output: /assets/img/posts
+
+content:
+  - name: posts
+    label: Blog posts
+    type: collection
+    path: _posts
+    filename: "{year}-{month}-{day}-{primary}.md"
+    view:
+      fields: [title, author, sport, date]
+      primary: title
+      sort: [date, title]
+      default:
+        sort: date
+        order: desc
+    fields:
+      - name: title
+        label: Title
+        type: string
+        required: true
+      - name: date
+        label: Date
+        type: date
+        required: true
+      - name: author
+        label: Author
+        type: select
+        required: true
+        options:
+          values:
+            - { value: host2, label: Niko Gogonis }
+            - { value: host3, label: Sebastian Blasdel }
+            - { value: host1, label: Oliver Clayman }
+            - { value: host5, label: Host Five }
+            - { value: host6, label: David Mathes }
+            - { value: host4, label: Riley Bidner }
+      - name: sport
+        label: Sport
+        type: select
+        required: true
+        default: other
+        options:
+          values:
+            - { value: nfl, label: NFL }
+            - { value: nba, label: NBA }
+            - { value: ufc, label: UFC }
+            - { value: nhl, label: NHL }
+            - { value: soccer, label: Soccer }
+            - { value: golf, label: Golf }
+            - { value: college, label: College }
+            - { value: other, label: Hot Take }
+      - name: take
+        label: The take (one line, shown in the red box)
+        type: string
+      - name: pitiful
+        label: "Pitiful-meter (1 = Actually Reasonable, 5 = Career-Ending)"
+        type: number
+        default: 3
+        options:
+          min: 1
+          max: 5
+      - name: body
+        label: Post
+        type: rich-text
+
+  - name: crew
+    label: The Crew
+    type: file
+    path: _data/crew.yml
+    list: true
+    fields:
+      - { name: id, label: "ID (don't change; posts use it)", type: string, required: true }
+      - { name: name, label: Name, type: string, required: true }
+      - { name: role, label: Nickname, type: string }
+      - { name: number, label: Jersey number, type: number }
+      - { name: bio, label: Bio, type: text }
+      - { name: photo, label: Photo, type: image }
+      - name: favorites
+        label: Favorites
+        type: object
+        fields:
+          - { name: nfl, label: NFL, type: string }
+          - { name: nba, label: NBA, type: string }
+          - { name: ufc, label: UFC, type: string }
+          - { name: nhl, label: NHL, type: string }
+          - { name: soccer, label: Soccer, type: string }
+          - { name: golf, label: Golf, type: string }
+          - { name: college, label: College, type: string }
