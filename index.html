@@ -21,14 +21,19 @@ body_class: home
 </section>
 
 {% if site.posts.size > 0 %}
-<div class="ticker" aria-label="Latest takes">
-  <div class="ticker-label">Hot Takes</div>
+{% assign tick_posts = site.posts | slice: 0, 8 %}
+{% assign tick_fill = 6 | divided_by: tick_posts.size | plus: 1 %}
+{% assign tick_items = tick_posts.size | times: tick_fill %}
+<div class="ticker" role="region" aria-label="Breaking takes" style="--dur: {{ tick_items | times: 7 }}s">
+  <div class="ticker-label"><span class="live-dot" aria-hidden="true"></span>Breaking<span class="ticker-label-sub">Takes</span></div>
   <div class="ticker-track">
     <div class="ticker-move">
-      {% for rep in (1..2) %}
-      {% for post in site.posts limit:8 %}
-      <a href="{{ post.url | relative_url }}" {% if rep == 2 %}aria-hidden="true" tabindex="-1"{% endif %}><b>{{ site.data.sports[post.sport].label | default: "Take" }}</b> {{ post.take | default: post.title }}</a>
-      {% endfor %}
+      {% for half in (1..2) %}
+      <div class="ticker-group"{% if half == 2 %} aria-hidden="true"{% endif %}>
+        {% for rep in (1..tick_fill) %}{% for post in tick_posts %}
+        <a href="{{ post.url | relative_url }}"{% if half == 2 or rep > 1 %} tabindex="-1"{% endif %}{% if rep > 1 and half == 1 %} aria-hidden="true"{% endif %}><b>{{ site.data.sports[post.sport].label | default: "Take" }}</b>{{ post.take | default: post.title }}</a>
+        {% endfor %}{% endfor %}
+      </div>
       {% endfor %}
     </div>
   </div>

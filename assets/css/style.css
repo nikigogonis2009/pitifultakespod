@@ -175,24 +175,62 @@ button { font: inherit; cursor: pointer; }
   .hero-lede { font-size: 18px; }
 }
 
-/* ---------- Ticker ---------- */
-.ticker { display: flex; background: var(--red); color: #fff; overflow: hidden; border-bottom: 3px solid var(--navy); }
+/* ---------- Ticker (breaking news bar) ---------- */
+.ticker {
+  position: relative; display: flex; align-items: stretch; overflow: hidden; color: #fff;
+  background: linear-gradient(180deg, #ef3b41 0%, var(--red) 55%, var(--red-dark) 100%);
+  border-top: 3px solid #fff; border-bottom: 3px solid var(--navy);
+  box-shadow: 0 6px 18px -8px rgba(14, 22, 48, .6);
+}
 .ticker-label {
-  flex: none; background: var(--navy); font: 400 18px/1 var(--display); letter-spacing: .06em;
-  text-transform: uppercase; padding: 16px 22px; position: relative; z-index: 1;
-  clip-path: polygon(0 0, 100% 0, calc(100% - 14px) 100%, 0 100%); padding-right: 34px;
+  flex: none; position: relative; z-index: 2; display: flex; align-items: center; gap: 10px;
+  background: #fff; color: var(--red-dark);
+  font: 400 22px/1 var(--display); letter-spacing: .06em; text-transform: uppercase;
+  padding: 14px 40px 14px 22px;
+  clip-path: polygon(0 0, 100% 0, calc(100% - 18px) 100%, 0 100%);
 }
-.ticker-track { overflow: hidden; flex: 1; display: flex; align-items: center; }
-.ticker-move { display: flex; white-space: nowrap; animation: ticker 45s linear infinite; }
-.ticker:hover .ticker-move { animation-play-state: paused; }
+.ticker-label::after {
+  content: ""; position: absolute; top: 0; bottom: 0; right: 6px; width: 8px;
+  background: var(--navy); transform: skewX(-21deg);
+}
+.ticker-label-sub {
+  font: 800 13px/1 var(--cond); letter-spacing: .2em; color: #fff; background: var(--navy);
+  padding: 5px 7px 4px; border-radius: 3px;
+}
+.live-dot {
+  width: 11px; height: 11px; border-radius: 50%; background: var(--red); flex: none;
+  box-shadow: 0 0 0 0 rgba(227, 52, 58, .7); animation: live-pulse 1.4s ease-out infinite;
+}
+@keyframes live-pulse {
+  0% { box-shadow: 0 0 0 0 rgba(227, 52, 58, .75); opacity: 1; }
+  60% { box-shadow: 0 0 0 9px rgba(227, 52, 58, 0); opacity: .55; }
+  100% { box-shadow: 0 0 0 0 rgba(227, 52, 58, 0); opacity: 1; }
+}
+.ticker-track {
+  flex: 1; min-width: 0; overflow: hidden; display: flex; align-items: center;
+  mask-image: linear-gradient(90deg, transparent 0, #000 24px, #000 calc(100% - 40px), transparent);
+  -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 24px, #000 calc(100% - 40px), transparent);
+}
+.ticker-move { display: flex; width: max-content; animation: ticker var(--dur, 40s) linear infinite; will-change: transform; }
+.ticker:hover .ticker-move, .ticker:focus-within .ticker-move { animation-play-state: paused; }
+.ticker-group { display: flex; flex: none; }
 .ticker-move a {
-  text-decoration: none; font: 600 18px/1 var(--cond); letter-spacing: .02em; padding: 0 28px;
-  position: relative;
+  display: inline-flex; align-items: center; gap: 10px; white-space: nowrap; text-decoration: none;
+  font: 700 19px/1 var(--cond); letter-spacing: .04em; text-transform: uppercase;
+  padding: 0 22px;
 }
-.ticker-move a::after { content: "●"; position: absolute; right: -6px; opacity: .55; font-size: 10px; top: 4px; }
-.ticker-move a b { font-weight: 800; letter-spacing: .12em; margin-right: 6px; opacity: .75; }
-.ticker-move a:hover { text-decoration: underline; }
+.ticker-move a::after { content: ""; width: 7px; height: 7px; background: #fff; transform: rotate(45deg); margin-left: 22px; opacity: .8; }
+.ticker-move a b {
+  font: 800 12px/1 var(--cond); letter-spacing: .16em; color: var(--red-dark); background: #fff;
+  padding: 5px 7px 4px; border-radius: 3px;
+}
+.ticker-move a:hover { text-decoration: underline; text-underline-offset: 4px; }
 @keyframes ticker { to { transform: translateX(-50%); } }
+@media (max-width: 600px) {
+  .ticker-label { font-size: 18px; padding: 12px 30px 12px 16px; gap: 8px; }
+  .ticker-label-sub { display: none; }
+  .ticker-move a { font-size: 17px; }
+}
 
 /* ---------- Sections ---------- */
 .section { padding: 80px 0; }
@@ -487,6 +525,7 @@ button { font: inherit; cursor: pointer; }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+  .ticker .ticker-move { animation: ticker calc(var(--dur, 40s) * 2) linear infinite !important; }
 }
 
 /* Buttons inside article text */
