@@ -2,7 +2,7 @@
 title: Cyril Gane Doesn't Know What's Coming at MSG
 date: 2026-11-05T23:05
 author: host2
-sport: other
+sport: ufc
 take: Josh Hokit Will Beat Cyril Gane
 pitiful: 4
 ---
