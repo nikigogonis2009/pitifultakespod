@@ -1,6 +1,6 @@
 ---
 title: Cyril Gane Doesn't Know What's Coming at MSG
-date: 2026-11-05 21:56:00 -0500
+date: 2026-11-05T23:05
 author: host2
 sport: other
 take: Josh Hokit Will Beat Cyril Gane
