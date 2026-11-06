@@ -392,8 +392,8 @@ button { font: inherit; cursor: pointer; }
 .fav-team.is-tbd { color: #a8a294; font-weight: 600; }
 @media (max-width: 640px) {
   .player { grid-template-columns: 1fr; }
-  .player-photo { min-height: 340px; }
-  .player-photo img { object-position: center 20%; }
+  .player-photo { min-height: 0; aspect-ratio: 4 / 5; }
+  .player-photo img { object-position: center 12%; }
   .player-body { padding: 22px 20px; }
   .player-name { font-size: 36px; }
 }
