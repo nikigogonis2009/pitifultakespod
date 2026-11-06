@@ -9,7 +9,7 @@
       {% assign p = page.url %}
       <a href="{{ '/' | relative_url }}" {% if p == '/' %}aria-current="page"{% endif %}>Home</a>
       <a href="{{ '/takes/' | relative_url }}" {% if p == '/takes/' or page.layout == 'post' %}aria-current="page"{% endif %}>All Takes</a>
-      <a href="{{ '/hot-takes/' | relative_url }}" {% if p == '/hot-takes/' %}aria-current="page"{% endif %}>Hot Takes</a>
+      <a href="{{ '/hot-takes/' | relative_url }}" {% if p == '/hot-takes/' or p == '/hot-takes/receipts/' %}aria-current="page"{% endif %}>Hot Takes</a>
       <a href="{{ '/crew/' | relative_url }}" {% if p == '/crew/' %}aria-current="page"{% endif %}>The Crew</a>
       {% assign w_now = site.time | date: "%s" | plus: 0 %}{% assign w_reveal = site.data.wrapped.reveal_date | date: "%s" | plus: 0 %}
       {% if w_reveal > 0 and w_now >= w_reveal %}<a href="{{ '/wrapped/' | relative_url }}" {% if p == '/wrapped/' %}aria-current="page"{% endif %}>Wrapped</a>{% endif %}

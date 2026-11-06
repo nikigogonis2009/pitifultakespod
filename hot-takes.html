@@ -2,11 +2,11 @@
 layout: page
 title: Hot Takes
 kicker: The board
-lede: Only the truly pitiful make the board. Takes that score 4 or 5 on the Pitiful-meter get pinned here, and so does every season-long prediction. When one comes true it gets stamped. When it doesn't, it stays up forever.
+lede: Only the truly pitiful make the board. Takes that score 4 or 5 on the Pitiful-meter get pinned here, and so does every season-long prediction. When one is decided it gets stamped, stays up for a week, then gets filed in the Receipts.
 permalink: /hot-takes/
 ---
 {% assign crew = site.data.crew | sort: "number" %}
-{% include hot-posts.html %}{% assign notes = hot_posts %}
+{% include hot-posts.html %}{% assign notes = board_posts %}
 {% comment %} Once every host has a take on the board, show one note per host (their newest). {% endcomment %}
 {% assign hosts_with_takes = 0 %}
 {% for c in crew %}{% assign mine = notes | where: "author", c.id %}{% if mine.size > 0 %}{% assign hosts_with_takes = hosts_with_takes | plus: 1 %}{% endif %}{% endfor %}
@@ -45,7 +45,8 @@ permalink: /hot-takes/
     {% if mine.size == 0 %}
     <article class="note note-empty" data-host="{{ c.id }}" style="--note: {{ c.note_color }}">
       <span class="pin" aria-hidden="true"></span>
-      <p class="note-take">No hot takes yet. {{ c.name | split: " " | first }} is playing it safe.</p>
+      {% assign filed = receipt_posts | where: "author", c.id %}
+      {% if filed.size > 0 %}<a class="note-link" href="{{ '/hot-takes/receipts/' | relative_url }}"><p class="note-take">Nothing pending. {{ c.name | split: " " | first }}'s takes are in the receipts.</p></a>{% else %}<p class="note-take">No hot takes yet. {{ c.name | split: " " | first }} is playing it safe.</p>{% endif %}
       <footer class="note-foot"><span class="note-host">{{ c.name | split: " " | first }}</span><span class="note-meta">Waiting…</span></footer>
     </article>
     {% endif %}
@@ -54,7 +55,8 @@ permalink: /hot-takes/
 </div>
 
 <div class="board-key">
+  <a class="btn btn-ghost board-receipts-link" href="{{ '/hot-takes/receipts/' | relative_url }}">See the receipts{% if receipt_posts.size > 0 %} ({{ receipt_posts.size }}){% endif %} →</a>
   <span class="stamp stamp-called stamp-inline">Called it</span> came true
   <span class="stamp stamp-wrong stamp-inline">Wrong</span> didn't
-  <span class="board-key-plain">No stamp = still waiting · Takes rated 4+ and season-long predictions make the board</span>
+  <span class="board-key-plain">No stamp = still waiting · Stamped takes move to the Receipts after a week</span>
 </div>

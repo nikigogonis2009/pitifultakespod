@@ -79,6 +79,11 @@ content:
             - { value: pending, label: Still waiting }
             - { value: called-it, label: Called it }
             - { value: wrong, label: Wrong }
+      - name: decided
+        label: "Decided on (filled in automatically when you set a verdict; change it if needed)"
+        type: date
+        options:
+          time: true
       - name: body
         label: Post
         type: rich-text

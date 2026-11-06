@@ -1,0 +1,84 @@
+---
+layout: page
+title: The Receipts
+kicker: Hot Takes archive
+lede: Every hot take that's been decided, filed by the year it was settled. The ones we called, and the ones we'd rather forget.
+permalink: /hot-takes/receipts/
+---
+{% assign crew = site.data.crew | sort: "number" %}
+{% include hot-posts.html %}
+
+{% comment %} Collect the years takes were decided in, newest first. {% endcomment %}
+{% assign years = "" %}
+{% for n in receipt_posts %}
+  {% if n.decided %}{% assign dy = n.decided | date: "%Y" %}{% else %}{% assign dy = site.time | date: "%Y" %}{% endif %}
+  {% unless years contains dy %}{% assign years = years | append: dy | append: "," %}{% endunless %}
+{% endfor %}
+{% assign year_list = years | split: "," | sort | reverse %}
+
+<p class="receipts-back"><a href="{{ '/hot-takes/' | relative_url }}">← Back to the board</a></p>
+
+{% if receipt_posts.size == 0 %}
+<div class="receipts-empty">
+  <p class="note-take">Nothing's been decided yet. Every take is still alive… for now.</p>
+</div>
+{% else %}
+
+<div class="board-legend" role="group" aria-label="Show receipts from">
+  <button class="legend-chip is-active" data-board-filter="all" aria-pressed="true">Everyone</button>
+  {% for c in crew %}
+  {% assign mine = receipt_posts | where: "author", c.id %}
+  {% if mine.size > 0 %}<button class="legend-chip" data-board-filter="{{ c.id }}" aria-pressed="false" style="--note: {{ c.note_color }}"><span class="legend-swatch" aria-hidden="true"></span>{{ c.name | split: " " | first }} <small>{{ mine.size }}</small></button>{% endif %}
+  {% endfor %}
+</div>
+
+{% for yr in year_list %}
+<section class="receipts-year" aria-labelledby="year-{{ yr }}">
+  <h2 class="receipts-year-title" id="year-{{ yr }}">{{ yr }}</h2>
+
+  <ul class="receipts-records" aria-label="{{ yr }} records, called it to wrong">
+    {% for c in crew %}
+      {% assign rc = 0 %}{% assign rw = 0 %}
+      {% for n in receipt_posts %}{% if n.author == c.id %}
+        {% if n.decided %}{% assign dy = n.decided | date: "%Y" %}{% else %}{% assign dy = site.time | date: "%Y" %}{% endif %}
+        {% if dy == yr %}{% if n.verdict == "called-it" %}{% assign rc = rc | plus: 1 %}{% else %}{% assign rw = rw | plus: 1 %}{% endif %}{% endif %}
+      {% endif %}{% endfor %}
+      {% assign rt = rc | plus: rw %}
+      {% if rt > 0 %}<li style="--note: {{ c.note_color }}"><span class="rec-name">{{ c.name | split: " " | first }}</span><span class="rec-score">{{ rc }}–{{ rw }}</span></li>{% endif %}
+    {% endfor %}
+  </ul>
+
+  <div class="receipts-cols">
+    {% for side in (1..2) %}
+    {% if side == 1 %}{% assign want = "called-it" %}{% else %}{% assign want = "wrong" %}{% endif %}
+    <div class="receipts-col receipts-{{ want }}">
+      <h3 class="receipts-col-title"><span class="stamp {% if side == 1 %}stamp-called{% else %}stamp-wrong{% endif %} stamp-inline">{% if side == 1 %}Called it{% else %}Wrong{% endif %}</span></h3>
+      <div class="board receipts">
+        <div class="board-notes">
+        {% assign shown = 0 %}
+        {% for n in receipt_posts %}
+          {% if n.decided %}{% assign dy = n.decided | date: "%Y" %}{% else %}{% assign dy = site.time | date: "%Y" %}{% endif %}
+          {% if dy == yr and n.verdict == want %}
+          {% assign shown = shown | plus: 1 %}
+          {% assign c = crew | where: "id", n.author | first %}
+          {% assign s = site.data.sports[n.sport] | default: site.data.sports.other %}
+          <article class="note note-mini" data-host="{{ n.author }}" style="--note: {{ c.note_color | default: '#FFE45E' }}">
+            <span class="pin" aria-hidden="true"></span>
+            <a class="note-link" href="{{ n.url | relative_url }}"><p class="note-take">{{ n.take | default: n.title }}</p></a>
+            <footer class="note-foot">
+              <span class="note-host">{% if c %}{{ c.name | split: " " | first }}{% else %}The Crew{% endif %}</span>
+              <span class="note-meta">{{ s.label }}{% if n.season_long %} · Season-long{% endif %} · Decided {% if n.decided %}{{ n.decided | date: "%b %-d" }}{% else %}{{ site.time | date: "%b %-d" }}{% endif %}</span>
+            </footer>
+            <span class="stamp {% if side == 1 %}stamp-called{% else %}stamp-wrong{% endif %}">{% if side == 1 %}Called it{% else %}Wrong{% endif %}</span>
+          </article>
+          {% endif %}
+        {% endfor %}
+        {% if shown == 0 %}<p class="receipts-none">{% if side == 1 %}Nobody called anything. Shocking.{% else %}Not a single miss. Suspicious.{% endif %}</p>{% endif %}
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+{% endfor %}
+{% endif %}

@@ -1,8 +1,29 @@
 {% comment %}
-  Sets `hot_posts`: posts that belong on the Hot Takes board.
-  A post qualifies if it scores 4+ on the Pitiful-meter, or if it's marked
-  as a season-long prediction (any score). Newest first.
+  Hot Takes logic, shared by the board, the Receipts archive and Wrapped.
+
+  hot_posts     – every post that counts as a hot take: 4+ on the Pitiful-meter,
+                  or marked season-long (any score). Newest first.
+  board_posts   – what's on the board: takes still waiting on a verdict, plus
+                  decided takes for 7 days after their "decided" date.
+  receipt_posts – every decided take (called it / wrong), for the archive.
+
+  A decided take with no "decided" date yet counts as decided right now
+  (the site fills the date in automatically on its next rebuild).
 {% endcomment %}
 {% assign hot_high = site.posts | where_exp: "p", "p.pitiful > 3" %}
 {% assign hot_season = site.posts | where: "season_long", true | where_exp: "p", "p.pitiful < 4" %}
 {% assign hot_posts = hot_high | concat: hot_season | sort: "date" | reverse %}
+{% assign hot_now = site.time | date: "%s" | plus: 0 %}
+{% assign board_keys = "|" %}{% assign receipt_keys = "|" %}
+{% for hp in hot_posts %}
+  {% if hp.verdict == "called-it" or hp.verdict == "wrong" %}
+    {% assign receipt_keys = receipt_keys | append: hp.url | append: "|" %}
+    {% if hp.decided %}{% assign hp_dec = hp.decided | date: "%s" | plus: 0 %}{% else %}{% assign hp_dec = hot_now %}{% endif %}
+    {% assign hp_until = hp_dec | plus: 604800 %}
+    {% if hp_until > hot_now %}{% assign board_keys = board_keys | append: hp.url | append: "|" %}{% endif %}
+  {% else %}
+    {% assign board_keys = board_keys | append: hp.url | append: "|" %}
+  {% endif %}
+{% endfor %}
+{% assign board_posts = hot_posts | where_exp: "p", "board_keys contains p.url" %}
+{% assign receipt_posts = hot_posts | where_exp: "p", "receipt_keys contains p.url" %}

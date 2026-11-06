@@ -1,6 +1,7 @@
 # Builds and publishes pitifultakes.com.
 # Runs on every save (push) and every 15 minutes, so scheduled posts and the
-# Wrapped page go live on time without anyone saving anything.
+# Wrapped page go live on time without anyone saving anything. It also fills in
+# the "decided" date on posts that just got a Called it / Wrong verdict.
 name: Build and publish site
 
 on:
@@ -11,7 +12,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
 
@@ -24,6 +25,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: Fill in decided dates for new verdicts
+        run: |
+          python3 .github/scripts/stamp_decided.py
+          if ! git diff --quiet; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git commit -am "Record decided dates for new verdicts"
+            git pull --rebase --autostash && git push || echo "Push failed; the next run will retry."
+          fi
       - uses: actions/configure-pages@v5
       - uses: actions/jekyll-build-pages@v1
         with:

@@ -53,6 +53,13 @@ The five posts already in `_posts/` are samples. Delete them whenever you're rea
 - **Posts:** give a post a future date and time in the editor. It stays hidden until then and appears within about 15 minutes of that time.
 - **Wrapped:** `pitifultakes.com/wrapped/` doesn't exist until the date at the top of `_wrapped/2026.html` (Nov 30), then shows a countdown teaser. The full Wrapped is revealed at `reveal_date` in `_data/wrapped.yml` (Dec 25). Both dates can be changed.
 
+## Hot Takes board and Receipts
+
+- A post goes on the Hot Takes board if it's rated 4+ on the Pitiful-meter or marked **Season-long prediction**.
+- Set its **Verdict** (Called it / Wrong) when it's decided. The site fills in **Decided on** automatically on its next rebuild (change it if needed).
+- Decided takes stay on the board with their stamp for 7 days, then move to the Receipts (`/hot-takes/receipts/`), filed by the year they were decided. Undecided takes stay on the board, even across years.
+- Wrapped counts Called it / Wrong by the year each take was decided.
+
 ## Edit the hosts, sports and links
 
 - **Hosts:** `_data/crew.yml` holds names, nicknames, jersey numbers and bios. To add a photo, put it in `assets/img/crew/` and set `photo: crew/yourname.jpg`.
