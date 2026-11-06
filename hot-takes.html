@@ -7,6 +7,10 @@ permalink: /hot-takes/
 ---
 {% assign crew = site.data.crew | sort: "number" %}
 {% include hot-posts.html %}{% assign notes = hot_posts %}
+{% comment %} Once every host has a take on the board, show one note per host (their newest). {% endcomment %}
+{% assign hosts_with_takes = 0 %}
+{% for c in crew %}{% assign mine = notes | where: "author", c.id %}{% if mine.size > 0 %}{% assign hosts_with_takes = hosts_with_takes | plus: 1 %}{% endif %}{% endfor %}
+{% if hosts_with_takes == crew.size %}{% assign one_each = true %}{% else %}{% assign one_each = false %}{% endif %}
 
 <div class="board-legend" role="group" aria-label="Show takes from">
   <button class="legend-chip is-active" data-board-filter="all" aria-pressed="true">Everyone</button>
@@ -16,12 +20,16 @@ permalink: /hot-takes/
   {% endfor %}
 </div>
 
+{% if one_each %}<p class="board-note-hint">Showing each host's newest hot take. Tap a name to see all of theirs.</p>{% endif %}
 <div class="board">
   <div class="board-notes">
+    {% assign seen = "," %}
     {% for n in notes %}
     {% assign c = crew | where: "id", n.author | first %}
+    {% assign key = "," | append: n.author | append: "," %}
+    {% if one_each and seen contains key %}{% assign extra = true %}{% else %}{% assign extra = false %}{% assign seen = seen | append: n.author | append: "," %}{% endif %}
     {% assign s = site.data.sports[n.sport] | default: site.data.sports.other %}
-    <article class="note" data-host="{{ n.author }}" style="--note: {{ c.note_color | default: '#FFE45E' }}">
+    <article class="note{% if extra %} note-extra{% endif %}" data-host="{{ n.author }}" style="--note: {{ c.note_color | default: '#FFE45E' }}">
       <span class="pin" aria-hidden="true"></span>
       <a class="note-link" href="{{ n.url | relative_url }}"><p class="note-take">{{ n.take | default: n.title }}</p></a>
       <footer class="note-foot">

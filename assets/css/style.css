@@ -682,3 +682,6 @@ body { min-height: 100vh; display: flex; flex-direction: column; }
 .cd-unit { display: block; margin-top: 6px; font: 700 13px/1 var(--cond); letter-spacing: .2em; text-transform: uppercase; color: rgba(255,255,255,.7); }
 .note-link { color: inherit; text-decoration: none; flex: 1; display: block; }
 .note-link:hover .note-take { text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 4px; }
+.note.note-extra { display: none; }
+.note.note-extra.is-shown { display: flex; }
+.board-note-hint { margin: -8px 0 18px; font: 600 15px/1.3 var(--cond); letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }

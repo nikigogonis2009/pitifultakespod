@@ -45,7 +45,11 @@
     chip.addEventListener('click', function () {
       var host = chip.dataset.boardFilter;
       chips.forEach(function (c) { var on = c === chip; c.classList.toggle('is-active', on); c.setAttribute('aria-pressed', on); });
-      notes.forEach(function (n) { n.classList.toggle('is-hidden', host !== 'all' && n.dataset.host !== host); });
+      notes.forEach(function (n) {
+        var show = host === 'all' ? !n.classList.contains('note-extra') : n.dataset.host === host;
+        n.classList.toggle('is-hidden', !show);
+        n.classList.toggle('is-shown', show);
+      });
     });
   });
 
