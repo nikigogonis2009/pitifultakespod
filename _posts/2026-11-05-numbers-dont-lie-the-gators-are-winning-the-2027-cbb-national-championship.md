@@ -2,7 +2,7 @@
 title: "Numbers Don't Lie: The Gators are Winning the 2027 CBB National Championship"
 date: 2026-11-06T09:00
 author: host2
-sport: other
+sport: college
 take: The Gators are Winning March Madness
 pitiful: 2
 ---
