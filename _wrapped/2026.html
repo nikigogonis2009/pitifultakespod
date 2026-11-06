@@ -38,7 +38,7 @@ date: 2026-11-30 00:00:00 -0500
 {% endif %}{% endfor %}
 
 {% assign total_notes = 0 %}{% assign total_called = 0 %}{% assign total_wrong = 0 %}
-{% for n in site.data.hottakes %}{% assign ny = n.date | date: "%Y" %}{% if ny == y %}
+{% assign hot_posts = site.posts | where_exp: "p", "p.pitiful > 3" %}{% for n in hot_posts %}{% assign ny = n.date | date: "%Y" %}{% if ny == y %}
   {% assign total_notes = total_notes | plus: 1 %}
   {% if n.verdict == "called-it" %}{% assign total_called = total_called | plus: 1 %}{% elsif n.verdict == "wrong" %}{% assign total_wrong = total_wrong | plus: 1 %}{% endif %}
 {% endif %}{% endfor %}
@@ -53,7 +53,7 @@ date: 2026-11-30 00:00:00 -0500
   {% if n_posts > most_count %}{% assign most_count = n_posts %}{% assign most_host = c %}{% endif %}
   {% if n_posts > 0 %}{% assign avg = n_score | times: 1.0 | divided_by: n_posts %}{% if avg > pit_avg %}{% assign pit_avg = avg %}{% assign pit_host = c %}{% endif %}{% endif %}
   {% assign n_called = 0 %}
-  {% for n in site.data.hottakes %}{% assign ny = n.date | date: "%Y" %}{% if ny == y and n.author == c.id and n.verdict == "called-it" %}{% assign n_called = n_called | plus: 1 %}{% endif %}{% endfor %}
+  {% assign hot_posts = site.posts | where_exp: "p", "p.pitiful > 3" %}{% for n in hot_posts %}{% assign ny = n.date | date: "%Y" %}{% if ny == y and n.author == c.id and n.verdict == "called-it" %}{% assign n_called = n_called | plus: 1 %}{% endif %}{% endfor %}
   {% if n_called > prophet_count %}{% assign prophet_count = n_called %}{% assign prophet_host = c %}{% endif %}
 {% endfor %}
 
@@ -162,7 +162,7 @@ date: 2026-11-30 00:00:00 -0500
         {% for c in crew %}
           {% assign n_posts = 0 %}{% assign n_score = 0 %}{% assign n_called = 0 %}{% assign n_wrong = 0 %}
           {% for p in site.posts %}{% assign py = p.date | date: "%Y" %}{% if py == y and p.author == c.id %}{% assign n_posts = n_posts | plus: 1 %}{% assign n_score = n_score | plus: p.pitiful %}{% endif %}{% endfor %}
-          {% for n in site.data.hottakes %}{% assign ny = n.date | date: "%Y" %}{% if ny == y and n.author == c.id %}{% if n.verdict == "called-it" %}{% assign n_called = n_called | plus: 1 %}{% elsif n.verdict == "wrong" %}{% assign n_wrong = n_wrong | plus: 1 %}{% endif %}{% endif %}{% endfor %}
+          {% assign hot_posts = site.posts | where_exp: "p", "p.pitiful > 3" %}{% for n in hot_posts %}{% assign ny = n.date | date: "%Y" %}{% if ny == y and n.author == c.id %}{% if n.verdict == "called-it" %}{% assign n_called = n_called | plus: 1 %}{% elsif n.verdict == "wrong" %}{% assign n_wrong = n_wrong | plus: 1 %}{% endif %}{% endif %}{% endfor %}
           <tr>
             <th scope="row"><span class="wr-num">#{{ c.number }}</span> {{ c.name }}</th>
             <td>{{ n_posts }}</td>

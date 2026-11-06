@@ -66,46 +66,8 @@ content:
         options:
           min: 1
           max: 5
-      - name: body
-        label: Post
-        type: rich-text
-
-  - name: hottakes
-    label: Hot Takes board
-    type: file
-    path: _data/hottakes.yml
-    list: true
-    fields:
-      - name: author
-        label: Whose take
-        type: select
-        required: true
-        options:
-          values:
-            - { value: host2, label: Niko Gogonis }
-            - { value: host3, label: Sebastian Blasdel }
-            - { value: host1, label: Oliver Clayman }
-            - { value: host5, label: Derya Hagnesten }
-            - { value: host6, label: David Mathes }
-            - { value: host4, label: Riley Bidner }
-      - { name: take, label: The take (short; it goes on a sticky note), type: text, required: true }
-      - name: sport
-        label: Sport
-        type: select
-        default: other
-        options:
-          values:
-            - { value: nfl, label: NFL }
-            - { value: nba, label: NBA }
-            - { value: ufc, label: UFC }
-            - { value: nhl, label: NHL }
-            - { value: soccer, label: Soccer }
-            - { value: golf, label: Golf }
-            - { value: college, label: College }
-            - { value: other, label: Hot Take }
-      - { name: date, label: Date, type: date, required: true }
       - name: verdict
-        label: Verdict
+        label: "Verdict (posts rated 4+ go on the Hot Takes board)"
         type: select
         default: pending
         options:
@@ -113,6 +75,9 @@ content:
             - { value: pending, label: Still waiting }
             - { value: called-it, label: Called it }
             - { value: wrong, label: Wrong }
+      - name: body
+        label: Post
+        type: rich-text
 
   - name: wrapped
     label: Year-end Wrapped
