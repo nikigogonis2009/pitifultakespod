@@ -10,7 +10,6 @@
       <a href="{{ '/' | relative_url }}" {% if p == '/' %}aria-current="page"{% endif %}>Home</a>
       <a href="{{ '/takes/' | relative_url }}" {% if p == '/takes/' or page.layout == 'post' %}aria-current="page"{% endif %}>All Takes</a>
       <a href="{{ '/crew/' | relative_url }}" {% if p == '/crew/' %}aria-current="page"{% endif %}>The Crew</a>
-      <a class="nav-cta" href="{{ '/feed.xml' | relative_url }}">RSS</a>
     </nav>
   </div>
 </header>

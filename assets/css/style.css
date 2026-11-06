@@ -492,3 +492,7 @@ button { font: inherit; cursor: pointer; }
 /* Buttons inside article text */
 .prose a.btn { color: #fff; text-decoration: none; }
 .page-body.prose { padding-top: 40px; }
+
+/* Keep the footer at the bottom on short pages */
+body { min-height: 100vh; display: flex; flex-direction: column; }
+#main { flex: 1 0 auto; }
