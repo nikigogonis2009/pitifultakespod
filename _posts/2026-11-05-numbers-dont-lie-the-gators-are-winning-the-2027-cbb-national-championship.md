@@ -5,6 +5,7 @@ author: host2
 sport: college
 take: The Gators are Winning March Madness
 pitiful: 2
+season_long: true
 ---
 Sure, it’s November, and picking my champion this early might bite me in the butt in April. But I don’t care. We’re winning it all, and here’s why.
 

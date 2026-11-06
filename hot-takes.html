@@ -2,11 +2,11 @@
 layout: page
 title: Hot Takes
 kicker: The board
-lede: Only the truly pitiful make the board. Any take scoring 4 or 5 on the Pitiful-meter gets pinned here for the world to see. When one comes true it gets stamped. When it doesn't, it stays up forever.
+lede: Only the truly pitiful make the board. Takes that score 4 or 5 on the Pitiful-meter get pinned here, and so does every season-long prediction. When one comes true it gets stamped. When it doesn't, it stays up forever.
 permalink: /hot-takes/
 ---
 {% assign crew = site.data.crew | sort: "number" %}
-{% assign notes = site.posts | where_exp: "p", "p.pitiful > 3" %}
+{% include hot-posts.html %}{% assign notes = hot_posts %}
 
 <div class="board-legend" role="group" aria-label="Show takes from">
   <button class="legend-chip is-active" data-board-filter="all" aria-pressed="true">Everyone</button>
@@ -26,7 +26,7 @@ permalink: /hot-takes/
       <a class="note-link" href="{{ n.url | relative_url }}"><p class="note-take">{{ n.take | default: n.title }}</p></a>
       <footer class="note-foot">
         <span class="note-host">{% if c %}{{ c.name | split: " " | first }}{% else %}The Crew{% endif %}</span>
-        <span class="note-meta">{{ s.label }} · Pitiful {{ n.pitiful }}/5 · <time datetime="{{ n.date | date_to_xmlschema }}">{{ n.date | date: "%b %-d, %Y" }}</time></span>
+        <span class="note-meta">{{ s.label }}{% if n.season_long %} · Season-long{% endif %} · Pitiful {{ n.pitiful }}/5 · <time datetime="{{ n.date | date_to_xmlschema }}">{{ n.date | date: "%b %-d, %Y" }}</time></span>
       </footer>
       {% if n.verdict == "called-it" %}<span class="stamp stamp-called">Called it</span>{% elsif n.verdict == "wrong" %}<span class="stamp stamp-wrong">Wrong</span>{% endif %}
     </article>
@@ -48,5 +48,5 @@ permalink: /hot-takes/
 <div class="board-key">
   <span class="stamp stamp-called stamp-inline">Called it</span> came true
   <span class="stamp stamp-wrong stamp-inline">Wrong</span> didn't
-  <span class="board-key-plain">No stamp = still waiting · Only takes rated 4+ on the Pitiful-meter make the board</span>
+  <span class="board-key-plain">No stamp = still waiting · Takes rated 4+ and season-long predictions make the board</span>
 </div>

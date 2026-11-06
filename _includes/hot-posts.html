@@ -1,0 +1,8 @@
+{% comment %}
+  Sets `hot_posts`: posts that belong on the Hot Takes board.
+  A post qualifies if it scores 4+ on the Pitiful-meter, or if it's marked
+  as a season-long prediction (any score). Newest first.
+{% endcomment %}
+{% assign hot_high = site.posts | where_exp: "p", "p.pitiful > 3" %}
+{% assign hot_season = site.posts | where: "season_long", true | where_exp: "p", "p.pitiful < 4" %}
+{% assign hot_posts = hot_high | concat: hot_season | sort: "date" | reverse %}
