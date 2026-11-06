@@ -1,0 +1,19 @@
+# Year-end "Pitiful Podcast Review & Wrapped" page (pitifultakes.com/wrapped/).
+# The stats fill in automatically from posts and the Hot Takes board.
+# Set published to true when you're ready to reveal it.
+year: 2026
+published: false
+review: ""
+awards:
+  - award: Worst Take of the Year
+    winner: ""
+    note: ""
+  - award: Best Call of the Year
+    winner: ""
+    note: ""
+  - award: Most Likely to Be Wrong Again
+    winner: ""
+    note: ""
+  - award: Podcast MVP
+    winner: ""
+    note: ""

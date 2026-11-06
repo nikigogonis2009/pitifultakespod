@@ -1,0 +1,199 @@
+---
+layout: default
+title: Wrapped
+permalink: /wrapped/
+body_class: wrapped-page
+---
+{% assign w = site.data.wrapped %}
+{% assign y = w.year | append: "" %}
+{% assign crew = site.data.crew | sort: "number" %}
+
+{% unless w.published %}
+<section class="wrapped-teaser">
+  <div class="wrap">
+    <p class="kicker kicker-light">Pitiful Podcast Review</p>
+    <h1 class="wrapped-title">{{ y }}<br><span>Wrapped</span></h1>
+    <p class="wrapped-lede">Every take, every L, every "I told you so." Unwrapping in December.</p>
+    <a class="btn btn-red" href="{{ '/hot-takes/' | relative_url }}">See the Hot Takes board</a>
+  </div>
+</section>
+{% else %}
+
+{% comment %} ---------- Year totals ---------- {% endcomment %}
+{% assign total_posts = 0 %}{% assign total_words = 0 %}
+{% assign top_take = nil %}{% assign top_score = 0 %}
+{% for p in site.posts %}{% assign py = p.date | date: "%Y" %}{% if py == y %}
+  {% assign total_posts = total_posts | plus: 1 %}
+  {% assign wc = p.content | strip_html | number_of_words %}{% assign total_words = total_words | plus: wc %}
+  {% assign sc = p.pitiful | plus: 0 %}{% if sc > top_score %}{% assign top_score = sc %}{% assign top_take = p %}{% endif %}
+{% endif %}{% endfor %}
+
+{% assign total_notes = 0 %}{% assign total_called = 0 %}{% assign total_wrong = 0 %}
+{% for n in site.data.hottakes %}{% assign ny = n.date | date: "%Y" %}{% if ny == y %}
+  {% assign total_notes = total_notes | plus: 1 %}
+  {% if n.verdict == "called-it" %}{% assign total_called = total_called | plus: 1 %}{% elsif n.verdict == "wrong" %}{% assign total_wrong = total_wrong | plus: 1 %}{% endif %}
+{% endif %}{% endfor %}
+
+{% comment %} ---------- Per-host leaders ---------- {% endcomment %}
+{% assign most_host = nil %}{% assign most_count = 0 %}
+{% assign pit_host = nil %}{% assign pit_avg = 0 %}
+{% assign prophet_host = nil %}{% assign prophet_count = 0 %}
+{% for c in crew %}
+  {% assign n_posts = 0 %}{% assign n_score = 0 %}
+  {% for p in site.posts %}{% assign py = p.date | date: "%Y" %}{% if py == y and p.author == c.id %}{% assign n_posts = n_posts | plus: 1 %}{% assign n_score = n_score | plus: p.pitiful %}{% endif %}{% endfor %}
+  {% if n_posts > most_count %}{% assign most_count = n_posts %}{% assign most_host = c %}{% endif %}
+  {% if n_posts > 0 %}{% assign avg = n_score | times: 1.0 | divided_by: n_posts %}{% if avg > pit_avg %}{% assign pit_avg = avg %}{% assign pit_host = c %}{% endif %}{% endif %}
+  {% assign n_called = 0 %}
+  {% for n in site.data.hottakes %}{% assign ny = n.date | date: "%Y" %}{% if ny == y and n.author == c.id and n.verdict == "called-it" %}{% assign n_called = n_called | plus: 1 %}{% endif %}{% endfor %}
+  {% if n_called > prophet_count %}{% assign prophet_count = n_called %}{% assign prophet_host = c %}{% endif %}
+{% endfor %}
+
+{% comment %} ---------- Sports ---------- {% endcomment %}
+{% assign sport_max = 0 %}
+{% for s in site.data.sports %}{% assign k = s[0] %}{% assign cnt = 0 %}
+  {% for p in site.posts %}{% assign py = p.date | date: "%Y" %}{% if py == y and p.sport == k %}{% assign cnt = cnt | plus: 1 %}{% endif %}{% endfor %}
+  {% if cnt > sport_max %}{% assign sport_max = cnt %}{% endif %}
+{% endfor %}
+
+<section class="wr wr-intro">
+  <div class="wrap">
+    <p class="kicker kicker-light">Pitiful Podcast Review</p>
+    <h1 class="wrapped-title">{{ y }}<br><span>Wrapped</span></h1>
+    <p class="wrapped-lede">A full year of bad opinions, delivered with full confidence. Here's the damage.</p>
+  </div>
+</section>
+
+<section class="wr wr-red">
+  <div class="wrap wr-stats">
+    <div class="wr-stat"><span class="wr-big">{{ total_posts }}</span><span class="wr-label">take{% if total_posts != 1 %}s{% endif %} written</span></div>
+    <div class="wr-stat"><span class="wr-big">{{ total_words }}</span><span class="wr-label">words nobody fact-checked</span></div>
+    <div class="wr-stat"><span class="wr-big">{{ total_notes }}</span><span class="wr-label">hot take{% if total_notes != 1 %}s{% endif %} pinned to the board</span></div>
+  </div>
+</section>
+
+{% if most_host %}
+<section class="wr wr-cream">
+  <div class="wrap wr-feature">
+    {% if most_host.photo and most_host.photo != "" %}<img class="wr-photo" src="{{ most_host.photo | relative_url }}" alt="{{ most_host.name }}" loading="lazy">{% endif %}
+    <div>
+      <p class="wr-eyebrow">Most takes written</p>
+      <h2 class="wr-name">{{ most_host.name }}</h2>
+      <p class="wr-line"><strong>{{ most_count }}</strong> post{% if most_count != 1 %}s{% endif %} this year. Somebody had to carry the blog.</p>
+    </div>
+  </div>
+</section>
+{% endif %}
+
+{% if pit_host %}
+<section class="wr wr-navy">
+  <div class="wrap wr-feature">
+    {% if pit_host.photo and pit_host.photo != "" %}<img class="wr-photo" src="{{ pit_host.photo | relative_url }}" alt="{{ pit_host.name }}" loading="lazy">{% endif %}
+    <div>
+      <p class="wr-eyebrow">Most pitiful host</p>
+      <h2 class="wr-name">{{ pit_host.name }}</h2>
+      <p class="wr-line">Average Pitiful-meter of <strong>{{ pit_avg | round: 1 }}</strong> out of 5. Consistently, impressively wrong.</p>
+    </div>
+  </div>
+</section>
+{% endif %}
+
+{% if top_take %}
+{% assign ta = crew | where: "id", top_take.author | first %}
+<section class="wr wr-ink">
+  <div class="wrap wrap-narrow wr-center">
+    <p class="wr-eyebrow">The take of the year</p>
+    <blockquote class="wr-quote">“{{ top_take.take | default: top_take.title }}”</blockquote>
+    <p class="wr-line">{% if ta %}{{ ta.name }}{% else %}The Crew{% endif %} · {{ top_take.date | date: "%B %-d" }}</p>
+    {% include meter.html rating=top_take.pitiful big=true %}
+    <p><a class="btn btn-red" href="{{ top_take.url | relative_url }}">Read it again</a></p>
+  </div>
+</section>
+{% endif %}
+
+<section class="wr wr-cream">
+  <div class="wrap">
+    <p class="wr-eyebrow">What we talked about</p>
+    <h2 class="wr-heading">Takes by sport</h2>
+    <div class="wr-bars">
+      {% for s in site.data.sports %}{% assign k = s[0] %}{% assign cnt = 0 %}
+      {% for p in site.posts %}{% assign py = p.date | date: "%Y" %}{% if py == y and p.sport == k %}{% assign cnt = cnt | plus: 1 %}{% endif %}{% endfor %}
+      {% if cnt > 0 %}
+      {% assign pct = cnt | times: 100 | divided_by: sport_max %}
+      <div class="wr-bar-row">
+        <span class="wr-bar-label">{{ s[1].label }}</span>
+        <span class="wr-bar-track"><span class="wr-bar" style="width: {{ pct }}%; --chip: {{ s[1].color }}"></span></span>
+        <span class="wr-bar-num">{{ cnt }}</span>
+      </div>
+      {% endif %}{% endfor %}
+      {% if sport_max == 0 %}<p class="wr-line">No posts this year. Bold strategy.</p>{% endif %}
+    </div>
+  </div>
+</section>
+
+<section class="wr wr-cork">
+  <div class="wrap">
+    <p class="wr-eyebrow wr-eyebrow-dark">The Hot Takes board</p>
+    <h2 class="wr-heading">Receipts</h2>
+    <div class="wr-receipts">
+      <div class="note wr-note" style="--note: #FFE45E; --tilt: -2deg"><span class="pin" aria-hidden="true"></span><span class="wr-big">{{ total_called }}</span><span class="note-host">Called it</span></div>
+      <div class="note wr-note" style="--note: #FF9EC4; --tilt: 1.8deg"><span class="pin" aria-hidden="true"></span><span class="wr-big">{{ total_wrong }}</span><span class="note-host">Dead wrong</span></div>
+      {% if prophet_host %}<div class="note wr-note" style="--note: {{ prophet_host.note_color }}; --tilt: -1deg"><span class="pin" aria-hidden="true"></span><span class="note-take">Prophet of the year: {{ prophet_host.name | split: " " | first }}</span><span class="note-host">{{ prophet_count }} called</span></div>{% endif %}
+    </div>
+  </div>
+</section>
+
+<section class="wr wr-navy">
+  <div class="wrap">
+    <p class="wr-eyebrow">Final standings</p>
+    <h2 class="wr-heading">The leaderboard</h2>
+    <div class="wr-table-wrap">
+      <table class="wr-table">
+        <thead><tr><th scope="col">Host</th><th scope="col">Takes</th><th scope="col">Avg Pitiful</th><th scope="col">Called it</th><th scope="col">Wrong</th></tr></thead>
+        <tbody>
+        {% for c in crew %}
+          {% assign n_posts = 0 %}{% assign n_score = 0 %}{% assign n_called = 0 %}{% assign n_wrong = 0 %}
+          {% for p in site.posts %}{% assign py = p.date | date: "%Y" %}{% if py == y and p.author == c.id %}{% assign n_posts = n_posts | plus: 1 %}{% assign n_score = n_score | plus: p.pitiful %}{% endif %}{% endfor %}
+          {% for n in site.data.hottakes %}{% assign ny = n.date | date: "%Y" %}{% if ny == y and n.author == c.id %}{% if n.verdict == "called-it" %}{% assign n_called = n_called | plus: 1 %}{% elsif n.verdict == "wrong" %}{% assign n_wrong = n_wrong | plus: 1 %}{% endif %}{% endif %}{% endfor %}
+          <tr>
+            <th scope="row"><span class="wr-num">#{{ c.number }}</span> {{ c.name }}</th>
+            <td>{{ n_posts }}</td>
+            <td>{% if n_posts > 0 %}{{ n_score | times: 1.0 | divided_by: n_posts | round: 1 }}{% else %}–{% endif %}</td>
+            <td>{{ n_called }}</td>
+            <td>{{ n_wrong }}</td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+{% if w.awards and w.awards.size > 0 %}
+<section class="wr wr-red">
+  <div class="wrap">
+    <p class="wr-eyebrow">The Pitiful Awards</p>
+    <h2 class="wr-heading">And the winner is…</h2>
+    <div class="wr-awards">
+      {% for a in w.awards %}
+      {% assign wc = crew | where: "id", a.winner | first %}
+      <article class="wr-award">
+        <p class="wr-award-name">{{ a.award }}</p>
+        <p class="wr-award-winner">{% if wc %}{{ wc.name }}{% elsif a.winner and a.winner != "" %}{{ a.winner }}{% else %}TBD{% endif %}</p>
+        {% if a.note and a.note != "" %}<p class="wr-award-note">{{ a.note }}</p>{% endif %}
+      </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
+
+<section class="wr wr-cream">
+  <div class="wrap wrap-narrow">
+    <p class="wr-eyebrow">The year in review</p>
+    <h2 class="wr-heading">Pitiful Podcast Review</h2>
+    <div class="prose wr-review">
+      {% if w.review and w.review != "" %}{{ w.review | markdownify }}{% else %}<p>The crew's look back at the year goes here.</p>{% endif %}
+    </div>
+  </div>
+</section>
+{% endunless %}

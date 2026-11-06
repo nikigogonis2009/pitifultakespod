@@ -38,6 +38,17 @@
     if (hash) applyFilter(hash);
   }
 
+  // Hot Takes board host filter
+  var chips = document.querySelectorAll('[data-board-filter]');
+  var notes = document.querySelectorAll('.board .note');
+  chips.forEach(function (chip) {
+    chip.addEventListener('click', function () {
+      var host = chip.dataset.boardFilter;
+      chips.forEach(function (c) { var on = c === chip; c.classList.toggle('is-active', on); c.setAttribute('aria-pressed', on); });
+      notes.forEach(function (n) { n.classList.toggle('is-hidden', host !== 'all' && n.dataset.host !== host); });
+    });
+  });
+
   // Share button
   function toast(msg) {
     var t = document.createElement('div');

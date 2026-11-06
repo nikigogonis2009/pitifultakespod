@@ -1,0 +1,52 @@
+---
+layout: page
+title: Hot Takes
+kicker: The board
+lede: Every host's hottest takes, pinned up for the world to see. When one comes true it gets stamped. When it doesn't, it stays up forever.
+permalink: /hot-takes/
+---
+{% assign crew = site.data.crew | sort: "number" %}
+{% assign notes = site.data.hottakes | sort: "date" | reverse %}
+
+<div class="board-legend" role="group" aria-label="Show takes from">
+  <button class="legend-chip is-active" data-board-filter="all" aria-pressed="true">Everyone</button>
+  {% for c in crew %}
+  {% assign mine = notes | where: "author", c.id %}
+  <button class="legend-chip" data-board-filter="{{ c.id }}" aria-pressed="false" style="--note: {{ c.note_color }}"><span class="legend-swatch" aria-hidden="true"></span>{{ c.name | split: " " | first }} <small>{{ mine.size }}</small></button>
+  {% endfor %}
+</div>
+
+<div class="board">
+  <div class="board-notes">
+    {% for n in notes %}
+    {% assign c = crew | where: "id", n.author | first %}
+    {% assign s = site.data.sports[n.sport] | default: site.data.sports.other %}
+    <article class="note" data-host="{{ n.author }}" style="--note: {{ c.note_color | default: '#FFE45E' }}">
+      <span class="pin" aria-hidden="true"></span>
+      <p class="note-take">{{ n.take }}</p>
+      <footer class="note-foot">
+        <span class="note-host">{% if c %}{{ c.name | split: " " | first }}{% else %}The Crew{% endif %}</span>
+        <span class="note-meta">{{ s.label }}{% if n.date %} · <time datetime="{{ n.date | date: '%Y-%m-%d' }}">{{ n.date | date: "%b %-d, %Y" }}</time>{% endif %}</span>
+      </footer>
+      {% if n.verdict == "called-it" %}<span class="stamp stamp-called">Called it</span>{% elsif n.verdict == "wrong" %}<span class="stamp stamp-wrong">Wrong</span>{% endif %}
+    </article>
+    {% endfor %}
+
+    {% for c in crew %}
+    {% assign mine = notes | where: "author", c.id %}
+    {% if mine.size == 0 %}
+    <article class="note note-empty" data-host="{{ c.id }}" style="--note: {{ c.note_color }}">
+      <span class="pin" aria-hidden="true"></span>
+      <p class="note-take">No hot takes yet. {{ c.name | split: " " | first }} is scared.</p>
+      <footer class="note-foot"><span class="note-host">{{ c.name | split: " " | first }}</span><span class="note-meta">Waiting…</span></footer>
+    </article>
+    {% endif %}
+    {% endfor %}
+  </div>
+</div>
+
+<div class="board-key">
+  <span class="stamp stamp-called stamp-inline">Called it</span> came true
+  <span class="stamp stamp-wrong stamp-inline">Wrong</span> didn't
+  <span class="board-key-plain">No stamp = still waiting</span>
+</div>

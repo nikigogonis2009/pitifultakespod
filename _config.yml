@@ -16,6 +16,8 @@ links:
   tiktok: ""
 
 permalink: /takes/:year/:month/:title/
+# Publish posts as soon as they're saved, even if their date is later today or in the future.
+future: true
 timezone: America/New_York
 markdown: kramdown
 highlighter: rouge
