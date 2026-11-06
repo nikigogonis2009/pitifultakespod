@@ -77,10 +77,11 @@ body_class: home
       <a class="section-more" href="{{ '/crew/' | relative_url }}">Full roster →</a>
     </div>
     <div class="crew-strip">
-      {% for c in site.data.crew %}
+      {% assign crew = site.data.crew | sort: "number" %}
+      {% for c in crew %}
       <a class="jersey" href="{{ '/crew/' | relative_url }}#{{ c.id }}">
         <span class="jersey-num">{{ c.number }}</span>
-        <span class="jersey-name">{{ c.name }}</span>
+        <span class="jersey-name">{{ c.name | split: " " | first }}</span>
         <span class="jersey-role">{{ c.role }}</span>
       </a>
       {% endfor %}
