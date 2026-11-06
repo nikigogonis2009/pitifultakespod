@@ -1,17 +1,13 @@
----
-layout: page
-title: Write a Take
-kicker: For the crew
-lede: How to write, edit and publish posts. You don't need to touch any code.
-permalink: /write/
-prose: true
----
+# Writing a take
+
+How to write, edit and publish posts on pitifultakes.com. This guide lives in the repo only; it is not part of the website.
+
 
 ## The editor
 
 Posts are written in **Pages CMS**, a free editor that saves straight to the website's GitHub repo. You get a normal writing screen with bold, italics, headings, links and image uploads, plus dropdowns for the author, sport and Pitiful-meter.
 
-<p><a class="btn btn-red" href="https://app.pagescms.org" target="_blank" rel="noopener">Open the editor</a></p>
+**Editor:** https://app.pagescms.org
 
 ## First time only
 

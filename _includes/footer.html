@@ -10,7 +10,6 @@
     </div>
     <div class="footer-links">
       {% for l in site.links %}{% if l[1] != "" %}<a href="{{ l[1] }}" target="_blank" rel="noopener">{{ l[0] | capitalize }}</a>{% endif %}{% endfor %}
-      <a href="{{ '/write/' | relative_url }}">Write a take</a>
       <a href="{{ '/feed.xml' | relative_url }}">RSS</a>
     </div>
     <p class="footer-legal">© {{ site.time | date: "%Y" }} Pitiful Takes Sports Podcast. No takes were fact-checked in the making of this site.</p>
