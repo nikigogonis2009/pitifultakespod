@@ -676,3 +676,7 @@ body { min-height: 100vh; display: flex; flex-direction: column; }
   .wr-bar-row { grid-template-columns: 84px 1fr 36px; gap: 10px; }
   .wr-bar-label { font-size: 15px; }
 }
+.countdown { display: flex; flex-wrap: wrap; gap: 14px; margin: 0 0 36px; }
+.countdown > div { background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.18); border-radius: 12px; padding: 16px 20px 12px; min-width: 104px; text-align: center; }
+.cd-num { display: block; font: 400 64px/1 var(--display); font-variant-numeric: tabular-nums; }
+.cd-unit { display: block; margin-top: 6px; font: 700 13px/1 var(--cond); letter-spacing: .2em; text-transform: uppercase; color: rgba(255,255,255,.7); }

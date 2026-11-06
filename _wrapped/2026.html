@@ -1,19 +1,28 @@
 ---
 layout: default
 title: Wrapped
-permalink: /wrapped/
 body_class: wrapped-page
+# The page doesn't exist on the site until this date (the teaser goes up).
+# The full Wrapped is revealed on reveal_date in _data/wrapped.yml.
+date: 2026-11-30 00:00:00 -0500
 ---
 {% assign w = site.data.wrapped %}
 {% assign y = w.year | append: "" %}
 {% assign crew = site.data.crew | sort: "number" %}
 
-{% unless w.published %}
+{% assign w_now = site.time | date: "%s" | plus: 0 %}
+{% assign w_reveal = w.reveal_date | date: "%s" | plus: 0 %}
+{% if w_now < w_reveal %}
 <section class="wrapped-teaser">
   <div class="wrap">
     <p class="kicker kicker-light">Pitiful Podcast Review</p>
     <h1 class="wrapped-title">{{ y }}<br><span>Wrapped</span></h1>
-    <p class="wrapped-lede">Every take, every L, every "I told you so." Unwrapping in December.</p>
+    <p class="wrapped-lede">Every take, every L, every "I told you so." Drops {{ w.reveal_date | date: "%B %-d" }}.</p>
+    <div class="countdown" data-countdown="{{ w.reveal_date | date: '%Y-%m-%dT%H:%M:%S%z' }}" aria-label="Time until Wrapped drops">
+      <div><span class="cd-num" data-cd="d">--</span><span class="cd-unit">Days</span></div>
+      <div><span class="cd-num" data-cd="h">--</span><span class="cd-unit">Hours</span></div>
+      <div><span class="cd-num" data-cd="m">--</span><span class="cd-unit">Minutes</span></div>
+    </div>
     <a class="btn btn-red" href="{{ '/hot-takes/' | relative_url }}">See the Hot Takes board</a>
   </div>
 </section>
@@ -196,4 +205,4 @@ body_class: wrapped-page
     </div>
   </div>
 </section>
-{% endunless %}
+{% endif %}

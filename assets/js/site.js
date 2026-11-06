@@ -49,6 +49,21 @@
     });
   });
 
+  // Wrapped countdown
+  var cd = document.querySelector('[data-countdown]');
+  if (cd) {
+    var target = new Date(cd.dataset.countdown.replace(/([+-]\d\d)(\d\d)$/, '$1:$2')).getTime();
+    var pad = function (n) { return n < 10 ? '0' + n : '' + n; };
+    var tick = function () {
+      var left = Math.max(0, target - Date.now());
+      var d = Math.floor(left / 864e5), h = Math.floor(left / 36e5) % 24, m = Math.floor(left / 6e4) % 60;
+      cd.querySelector('[data-cd="d"]').textContent = d;
+      cd.querySelector('[data-cd="h"]').textContent = pad(h);
+      cd.querySelector('[data-cd="m"]').textContent = pad(m);
+    };
+    tick(); setInterval(tick, 30000);
+  }
+
   // Share button
   function toast(msg) {
     var t = document.createElement('div');

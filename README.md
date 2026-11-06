@@ -17,7 +17,7 @@ The site lives at **https://pitifultakes.com**, hosted free on GitHub Pages. The
 | CNAME Record | `www` | `nikigogonis2009.github.io.` |
 
 **2. GitHub** (this repo → Settings → Pages):
-- Build and deployment: **Deploy from a branch**, branch `main`, folder `/ (root)`.
+- Build and deployment → Source: **GitHub Actions**. The workflow in `.github/workflows/pages.yml` builds the site on every save and every 15 minutes, so scheduled posts and the Wrapped page go live on time.
 - Custom domain: `pitifultakes.com`, then Save.
 - Once the DNS check passes (minutes to a few hours), tick **Enforce HTTPS**.
 
@@ -47,6 +47,11 @@ and ## headings all work.
 Commit it (you can do it right on github.com with **Add file → Create new file**) and the site updates by itself.
 
 The five posts already in `_posts/` are samples. Delete them whenever you're ready.
+
+## Scheduling
+
+- **Posts:** give a post a future date and time in the editor. It stays hidden until then and appears within about 15 minutes of that time.
+- **Wrapped:** `pitifultakes.com/wrapped/` doesn't exist until the date at the top of `_wrapped/2026.html` (Nov 30), then shows a countdown teaser. The full Wrapped is revealed at `reveal_date` in `_data/wrapped.yml` (Dec 25). Both dates can be changed.
 
 ## Edit the hosts, sports and links
 

@@ -16,15 +16,21 @@ links:
   tiktok: ""
 
 permalink: /takes/:year/:month/:title/
-# Publish posts as soon as they're saved, even if their date is later today or in the future.
-future: true
 timezone: America/New_York
+# Posts (and the Wrapped page) dated in the future stay hidden until that date and time.
+# The site rebuilds every 15 minutes (.github/workflows/pages.yml), so they appear on schedule.
+collections:
+  wrapped:
+    output: true
+    permalink: /wrapped/
+
 markdown: kramdown
 highlighter: rouge
 exclude:
   - README.md
   - WRITING.md
   - Gemfile
+  - .github
   - Gemfile.lock
   - vendor
 

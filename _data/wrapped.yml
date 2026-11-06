@@ -1,8 +1,9 @@
 # Year-end "Pitiful Podcast Review & Wrapped" page (pitifultakes.com/wrapped/).
 # The stats fill in automatically from posts and the Hot Takes board.
-# Set published to true when you're ready to reveal it.
+# The teaser page appears on the date set at the top of _wrapped/2026.html (Nov 30).
+# The full Wrapped is revealed at reveal_date.
 year: 2026
-published: false
+reveal_date: 2026-12-25 00:00:00 -0500
 review: ""
 awards:
   - award: Worst Take of the Year

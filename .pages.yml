@@ -120,7 +120,11 @@ content:
     path: _data/wrapped.yml
     fields:
       - { name: year, label: Year, type: number }
-      - { name: published, label: Show the Wrapped page on the site, type: boolean }
+      - name: reveal_date
+        label: Reveal date (full Wrapped goes live)
+        type: date
+        options:
+          time: true
       - { name: review, label: Podcast review (the year in a few paragraphs), type: rich-text }
       - name: awards
         label: Awards
